@@ -1,27 +1,32 @@
 import {useForm} from "react-hook-form"
 import { useAuth} from "../context/AuthContext"
-import { useEffect } from "react";
-import {useNavigate} from "react-router-dom"
-
 
 function LoginPage() {
-
     const {
         register, 
         handleSubmit, 
         formState: {errors},
-    } = useForm(); // funciones que puedo reutilizar
+    } = useForm(); 
 
-    const onSubmit = handleSubmit(async(data) => {
-        console.log(data);
-    })
+    const {signin, errors: loginErrors} = useAuth();
+
+    const onSubmit = handleSubmit((data) => {
+        signin(data);
+    });
 
     return(
         <div className="flex h-[calc(100vh-100px)] items-center justify-center">
            <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
-                
+
                 <h1 className="text-2xl font-bold">Login</h1>
                 
+                {Array.isArray(loginErrors) && loginErrors.map((error, i) => (
+                    <div className="bg-red-500 p-1 text-white my-1" key={i}>
+                        {error}
+                    </div>
+                ))
+                }
+
                 <form onSubmit={onSubmit}>
                     <input 
                         type="text" 
