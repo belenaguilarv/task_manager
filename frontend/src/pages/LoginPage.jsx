@@ -1,5 +1,6 @@
 import {useForm} from "react-hook-form"
 import { useAuth} from "../context/AuthContext"
+import {Link} from "react-router-dom"
 
 function LoginPage() {
     const {
@@ -18,7 +19,7 @@ function LoginPage() {
         <div className="flex h-[calc(100vh-100px)] items-center justify-center">
            <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
 
-                <h1 className="text-2xl font-bold">Login</h1>
+                <h1 className="text-2xl font-bold my-2">Login</h1>
                 
                 {Array.isArray(loginErrors) && loginErrors.map((error, i) => (
                     <div className="bg-red-500 p-1 text-white my-1" key={i}>
@@ -49,6 +50,12 @@ function LoginPage() {
                         className="w-full bg text-white px-4 py-2 rounded-md">Sign in
                     </button>
                 </form>
+                <p className="flex gap-x-2 justify-between mt-6">
+                    Don't have an account? 
+                    <Link to="/register" className="text-sky-500">
+                        Sign up
+                    </Link>
+                </p>
            </div> 
         </div>
     )
