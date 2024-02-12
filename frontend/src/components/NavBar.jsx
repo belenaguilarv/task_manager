@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 function NavBar() {
 
     // me fijo si esta autenticado para que no aparezca el boton de login y register
-    const {isAuthenticated, user} = useAuth(); 
+    const {isAuthenticated, user, logout} = useAuth(); 
 
     return (
         <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 mt-0">
@@ -16,14 +16,14 @@ function NavBar() {
                 {isAuthenticated ? (
                     // si estas autenticado
                     <>
-                        <li>
+                        <li className="text-blue-300 font-semibold">
                             Welcome {user.username}
                         </li>
                         <li>
                             <Link to="/add-task">Add Task</Link>
                         </li>
                         <li>
-                            <Link to="/logout">Logout</Link>
+                        <Link to="/" onClick={() => logout()}>Logout</Link>
                         </li>
                     </>
                     ) : ( 

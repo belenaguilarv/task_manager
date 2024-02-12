@@ -43,6 +43,12 @@ export const AuthProvider = ({children}) => {
         }
     };
 
+    const logout = () => {
+        Cookies.remove("token")
+        setIsAuthenticated(false)
+        setUser(null)
+    };
+
     // el mensaje de error solo dura 5 seg en pantalla
     useEffect(() => {
         if(errors.length > 0){
@@ -85,6 +91,7 @@ export const AuthProvider = ({children}) => {
         <AuthContext.Provider value = {{
             signup,
             signin,
+            logout,
             user,
             isAuthenticated,
             errors,
