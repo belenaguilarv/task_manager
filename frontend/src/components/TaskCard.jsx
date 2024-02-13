@@ -9,16 +9,13 @@ function TaskCard({ task }) {
 
 
     return (
-        <div className=" bg-zinc-800 max-w-sm w-full p-10 rounded-md">
-        <header className="flex justify-between">
+        <div className=" bg-zinc-800 max-w-md w-full p-10 rounded-md">
+        <header className="flex justify-between ">
             <h1 className="text-xl font-semibold ">{task.title}</h1>
-            <div className="flex gap-x-2 items-center">
-                <button className="text-gray-600 "><Link to={`/tasks/${task._id}`}>Edit</Link></button>
-                <button className="text-red-700" onClick={() => {deleteTask(task._id)}}>Delete</button>
-            </div>
+
         </header>
-        <p className="font-light">{task.description}</p>
-        <p>
+        <p className="font-light p-2">{task.description}</p>
+        <p className="font-light p-2 text-gray-400">
         {task.date &&
           new Date(task.date).toLocaleDateString("en-US", {
             weekday: "long",
@@ -27,6 +24,11 @@ function TaskCard({ task }) {
             day: "numeric",
           })}
         </p> 
+
+        <div className="flex flex-col sm:flex-row gap-2 pt-6 font-light p-2 justify-between">
+                <button className="text-gray-600 underline "><Link to={`/tasks/${task._id}`}>Edit</Link></button>
+                <button className="text-red-700 underline mx-auto" onClick={() => {deleteTask(task._id)}}>Delete</button>
+        </div>
     </div>
     )
 }
