@@ -1,7 +1,12 @@
 import { createContext, useContext, useState} from 'react'
-import { createTasksRequest, getTasksRequest, deleteTaskRequest } from '../api/task';
+import { 
+        createTaskRequest,
+        getTasksRequest, 
+        deleteTaskRequest,
+        getTaskRequest,
+        updateTaskRequest 
+      } from '../api/task';
 import PropTypes from 'prop-types';
-
 
 export const TaskContext = createContext();
 
@@ -12,7 +17,6 @@ export const useTasks = () => {
     }
     return context;
 }
-
 
 export function TaskProvider({ children }) {
     const [tasks, setTasks] = useState([]);
@@ -26,10 +30,14 @@ export function TaskProvider({ children }) {
         }
     };
 
-    const createTask = async(task) => {
-       const res = await createTasksRequest(task)
-       console.log(res)
-    };
+    const createTask = async (task) => {
+        try {
+          const res = await createTaskRequest(task);
+          console.log(res.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     const deleteTask = async(id) => {
         try {
@@ -38,7 +46,24 @@ export function TaskProvider({ children }) {
         } catch (error) {
             console.error(error)
         }
-    }
+    };
+
+    const getTask = async (id) => {
+        try {
+          const res = await getTaskRequest(id);
+          return res.data;
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+    const updateTask = async (id, task) => {
+        try {
+          await updateTaskRequest(id, task);
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     return (
         <TaskContext.Provider 
@@ -46,14 +71,14 @@ export function TaskProvider({ children }) {
                 tasks,
                 createTask,
                 getTasks,
-                deleteTask
+                deleteTask,
+                getTask,
+                updateTask
             }}>
             {children}
         </TaskContext.Provider>
     )
 }
-
-
 
 TaskProvider.propTypes = {
     children: PropTypes.node.isRequired

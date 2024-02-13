@@ -1,5 +1,6 @@
 import { useTasks } from "../context/TasksContext"
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 
 function TaskCard({ task }) {
@@ -12,10 +13,8 @@ function TaskCard({ task }) {
         <header className="flex justify-between">
             <h1 className="text-xl font-semibold">{task.title}</h1>
             <div className="flex gap-x-2 items-center">
-                <button className="text-gray-600 ">Edit</button>
-                <button className="text-red-700" onClick={() => {
-                    deleteTask(task._id)
-                }}>Delete</button>
+                <button className="text-gray-600 "><Link to={`/tasks/${task._id}`}>Edit</Link></button>
+                <button className="text-red-700" onClick={() => {deleteTask(task._id)}}>Delete</button>
             </div>
         </header>
         <p className="font-light">{task.description}</p>
