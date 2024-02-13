@@ -25,7 +25,7 @@
   },
   "jest": {
     "testMatch": [
-      "**/*_test.js"
+      "**/*.test.js"
     ],
     "transform": {
       "^.+\\.js$": "babel-jest"
