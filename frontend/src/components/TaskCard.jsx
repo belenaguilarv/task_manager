@@ -9,9 +9,9 @@ function TaskCard({ task }) {
 
 
     return (
-        <div className=" bg-zinc-800 max-w-md w-full p-10 rounded-md">
+        <div className=" bg-zinc-800 max-w-sm w-full p-10 rounded-md">
         <header className="flex justify-between">
-            <h1 className="text-xl font-semibold">{task.title}</h1>
+            <h1 className="text-xl font-semibold ">{task.title}</h1>
             <div className="flex gap-x-2 items-center">
                 <button className="text-gray-600 "><Link to={`/tasks/${task._id}`}>Edit</Link></button>
                 <button className="text-red-700" onClick={() => {deleteTask(task._id)}}>Delete</button>
